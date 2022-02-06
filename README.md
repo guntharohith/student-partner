@@ -46,15 +46,19 @@ Clone the Respository
 ```sh
 git clone https://github.com/guntharohith/student-partner.git
 ```
+```SH
 cd frontend
 npm install
 ng serve
+```
 The application will start on http://localhost:4200/
 
 # Configuring the database and starting backend
 
 configure the database and 
+```SH
 cd backend
 npm install
 nodemon app.js
+```
 The backend server will start on http://localhost:8080/

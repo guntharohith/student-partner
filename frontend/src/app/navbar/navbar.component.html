@@ -1,0 +1,93 @@
+<div class="navbar">
+  <a [routerLink]="isAdmin() ? '/admin' : '/'">
+    <img class="logo" src="./assets/logo.png" />
+  </a>
+
+  <div>
+    <ul class="navbar-menu">
+      <li *ngIf="isLoggedIn()" class="normal-link">
+        <a
+          [routerLink]="isAdmin() ? '/admin' : '/'"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
+      </li>
+      <li *ngIf="isLoggedIn() && isAdmin()" class="normal-link">
+        <a routerLink="/admin/users" routerLinkActive="active-link">Users</a>
+      </li>
+      <li *ngIf="isLoggedIn()" class="normal-link">
+        <a
+          [routerLink]="isAdmin() ? '/admin/learning-paths' : '/learning-paths'"
+          routerLinkActive="active-link"
+          >Learning Paths</a
+        >
+      </li>
+      <li *ngIf="isLoggedIn()" class="normal-link">
+        <a
+          [routerLink]="isAdmin() ? '/admin/resources' : '/resources'"
+          routerLinkActive="active-link"
+          >Resources</a
+        >
+      </li>
+      <li *ngIf="isLoggedIn() && isUser()" class="normal-link">
+        <a routerLink="/notes" routerLinkActive="active-link">Notes</a>
+      </li>
+      <li *ngIf="!isLoggedIn()">
+        <a routerLink="/login" routerLinkActive="active-link">Login</a>
+      </li>
+      <li *ngIf="!isLoggedIn()">
+        <a routerLink="/signup" routerLinkActive="active-link">Signup</a>
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-menu" *ngIf="isLoggedIn()">
+    <button (click)="toggle = !toggle">
+      <span class="fas fa-bars" [ngStyle]="{ color: 'rgb(24, 24, 60)' }"></span>
+    </button>
+    <ul *ngIf="toggle">
+      <li *ngIf="isLoggedIn()" class="toggle-link">
+        <a
+          [routerLink]="isAdmin() ? '/admin' : '/'"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="toggle = false"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="isAdmin() ? '/admin/profile' : '/profile'"
+          routerLinkActive="active-link"
+          (click)="toggle = false"
+          >Profile</a
+        >
+      </li>
+      <li *ngIf="isLoggedIn()" class="toggle-link">
+        <a
+          [routerLink]="isAdmin() ? '/admin/learning-paths' : '/learning-paths'"
+          routerLinkActive="active-link"
+          (click)="toggle = false"
+          >Learning Paths</a
+        >
+      </li>
+      <li *ngIf="isLoggedIn()" class="toggle-link">
+        <a
+          [routerLink]="isAdmin() ? '/admin/resources' : '/resources'"
+          routerLinkActive="active-link"
+          (click)="toggle = false"
+          >Resources</a
+        >
+      </li>
+      <li *ngIf="isLoggedIn() && isUser()" class="toggle-link">
+        <a routerLink="/notes" routerLinkActive="active-link" (click)="toggle = false">Notes</a>
+      </li>
+      <li *ngIf="isLoggedIn() && isAdmin()" class="toggle-link">
+        <a routerLink="/admin/users" routerLinkActive="active-link" (click)="toggle = false">Users</a>
+      </li>
+      <li>
+        <a routerLink="/login" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+.topic {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.link {
+  display: flex;
+}
+.link button {
+  margin-left: 15px;
+  margin-bottom: 0;
+}
+
+.add-learning-path {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.topics h2 {
+  color: rgb(26, 26, 45);
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 5px 0;
+}
+
+.topic-item {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.topic-item h5 {
+  margin: 0;
+  color: rgb(26, 26, 45);
+  letter-spacing: 1px;
+  padding: 5px 0;
+  margin-bottom: 10px;
+}
+
+.topic-item p {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+form {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding:  20px;
+}
+
+ a{
+  display: block;
+}

@@ -1,0 +1,41 @@
+.search:focus {
+  outline: none;
+}
+
+.search {
+  width: 150px;
+  border: 2px solid hsl(22, 31%, 52%);
+  border-radius: 5px;
+  padding: 5px;
+  color: hsl(22, 31%, 52%);
+}
+
+.search::placeholder{
+  color:hsl(22, 31%, 52%);
+}
+.form-item {
+  margin-bottom: 15px;
+}
+
+span {
+  font-size: 18px;
+  color: rgb(26, 26, 45);
+}
+
+textarea:focus {
+  outline: none;
+}
+textarea {
+  border: none;
+}
+
+.mat-column-action {
+  width: 100px;
+}
+
+.mat-cell {
+  padding: 10px;
+}
+.mat-header-cell {
+  padding: 10px;
+}

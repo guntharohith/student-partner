@@ -1,0 +1,44 @@
+img {
+  height: 400px;
+  width: 400px;
+}
+
+a {
+  display: block;
+}
+
+.form-item {
+  position: relative;
+}
+
+.form-item span {
+  position: absolute;
+  top: 5px;
+  font-size: 20px;
+  color: black;
+}
+
+
+.form-item input{
+    width: 80%;
+    padding-left: 50px;
+    padding-bottom: 10px;
+    font-size: 17px;
+}
+
+.password-hide {
+    position: absolute;
+    right: 25%;
+    bottom: 22px;
+    color: black;
+    background: none;
+    box-shadow: none;
+}
+
+
+.forgot-password{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color:black;
+}

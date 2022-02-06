@@ -1,0 +1,7 @@
+<div>
+    <p>
+        <a *ngIf="!isAdmin()">Home /</a>
+        <a *ngIf="isAdmin()" routerLink="/admin">Dashboard /</a>
+        <a *ngIf="childTitle" routerLink="/learning-paths"> Learning Paths /</a>
+         {{' '+title}}</p>
+</div>

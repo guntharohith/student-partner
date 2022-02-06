@@ -1,0 +1,109 @@
+<app-hero [title]="'Create Learning Path'" [childTitle]="'create-learing-path'"></app-hero>
+<div class="row">
+  <div class="col-md-6">
+    <form>
+      <h4 [ngStyle]="{ 'text-align': 'center', 'margin-bottom': '20px' }">
+        Add a Learning Path
+      </h4>
+      <div class="form-item">
+        <input
+          type="text"
+          name="name"
+          placeholder="Learning Path Name"
+          minlength="4"
+          [(ngModel)]="name"
+        />
+      </div>
+      <div class="form-item">
+        <input
+          type="text"
+          name="category"
+          placeholder="Category"
+          minlength="4"
+          [(ngModel)]="category"
+        />
+      </div>
+      <div class="form-item">
+        <label>Learning Path Type:</label>
+        <select name="type" [(ngModel)]="type">
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
+      </div>
+      <button
+        type="button"
+        class="add-learning-path"
+        (click)="topicModal = !topicModal"
+      >
+        Add Topic
+      </button>
+      <div *ngIf="topicModal" class="topic">
+        <div class="form-item">
+          <input
+            type="text"
+            name="topicName"
+            [(ngModel)]="topicName"
+            placeholder="Topic Name"
+          />
+        </div>
+        <div class="form-item">
+          <textarea
+            rows="{4}"
+            type="text"
+            name="topicDes"
+            [(ngModel)]="topicDes"
+            placeholder="Topic Description"
+          ></textarea>
+        </div>
+        <div class="form-item link">
+          <input
+            type="text"
+            name="resourceLink"
+            placeholder="Resource Link"
+            [(ngModel)]="resourceLink"
+          />
+          <button type="button" (click)="addResource()">Add</button>
+        </div>
+        <div class="form-item link">
+          <input
+            type="text"
+            name="assessmentLink"
+            placeholder="Assessment Link"
+            [(ngModel)]="assessmentLink"
+          />
+          <button type="button" (click)="addAssessment()">Add</button>
+        </div>
+        <button class="add-learning-path" type="button" (click)="addTopic()">
+          Save Topic
+        </button>
+      </div>
+      <div [ngStyle]="{ display: 'flex', justifyContent: 'space-between' }">
+        <button type="submit" (click)="addLearningPath()">SAVE</button>
+        <button type="button" (click)="setDefaultValues()">CANCEL</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6 topics">
+    <h2 [ngStyle]="{'margin-bottom':'20px'}">Topics Added</h2>
+    <div *ngFor="let topic of topics" class="topic-item">
+      <h5>{{ topic.topicName }}</h5>
+      <p>{{ topic.topicDes }}</p>
+      <div>
+        <h5>Resources</h5>
+        <p class="dont-break-out">
+          <a [href]="resource" *ngFor="let resource of topic.resources"
+            ><span class="fas fa-link"></span>{{ resource }}</a
+          >
+        </p>
+      </div>
+      <div>
+        <h5>Assessments</h5>
+        <p class="dont-break-out">
+          <a [href]="assessment" *ngFor="let assessment of topic.assessments"
+            ><span class="fas fa-link"></span>{{ assessment }}</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

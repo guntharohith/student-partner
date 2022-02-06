@@ -1,0 +1,73 @@
+<app-hero [title]="learningPath?.name" [childTitle]="'single-learning-path'"></app-hero>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 topics">
+      <h3
+        *ngFor="let topic of learningPath?.topics"
+        (click)="setCurrentTopic(topic)"
+        [ngClass]="{ active: currentTopic?.topicName === topic.topicName }"
+      >
+        {{ topic.topicName }}<span class="fas fa-chevron-right"></span>
+      </h3>
+    </div>
+    <div class="col-md-9 right">
+      <h2>{{ learningPath?.name }}</h2>
+      <div class="topic-item">
+        <h4>{{ currentTopic?.topicName }}</h4>
+        <p [ngStyle]="{ 'margin-bottom': '20px' }">
+          {{ currentTopic?.topicDes }}
+        </p>
+        <div [ngStyle]="{ 'margin-bottom': '20px' }">
+          <h4>Resources</h4>
+          <p class="dont-break-out">
+            <a
+              [href]="resource"
+              *ngFor="let resource of currentTopic?.resources"
+              ><span class="fas fa-link"></span>{{ resource }}</a
+            >
+          </p>
+        </div>
+        <div [ngStyle]="{ 'margin-bottom': '20px' }">
+          <h4>Assessments</h4>
+          <p class="dont-break-out">
+            <a
+              [href]="assessment"
+              *ngFor="let assessment of currentTopic?.assessments"
+              ><span class="fas fa-link"></span>{{ assessment }}</a
+            >
+          </p>
+        </div>
+        <button (click)="modal = true" [ngStyle]="{ 'margin-bottom': '20px' }">
+          Add Notes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="modal" class="modal-background">
+  <div class="modal-content">
+    <div class="flex" [ngStyle]="{ 'margin-bottom': '20px' }">
+      <h5>Add notes</h5>
+      <span
+        class="fas fa-times"
+        [ngStyle]="{ 'font-size': '20px' }"
+        (click)="modal = false"
+      ></span>
+    </div>
+    <mat-form-field appearance="outline" [style.width.px]="400">
+      <mat-label>Description</mat-label>
+      <textarea
+        rows="8"
+        matInput
+        type="text"
+        name="description"
+        [(ngModel)]="notesDescription"
+      ></textarea>
+    </mat-form-field>
+    <div class="flex">
+      <button (click)="modal = false">Cancel</button>
+      <button type="submit" (click)="addNotes()">Save</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,231 @@
+<div class="row" [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+  <div class="col-md-6">
+    <h1>Signup</h1>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-item">
+        <span class="fas fa-user-circle"></span>
+        <input
+          type="text"
+          name="firstName"
+          formControlName="firstName"
+          placeholder="First Name"
+        />
+        <p
+          class="text-danger"
+          *ngIf="
+            ((signupFormControl['firstName'].touched || submitted) &&
+            signupFormControl['firstName'].errors?.['required']) 
+          "
+        >
+          *First Name is required.
+        </p>
+
+        <p
+          [ngStyle]="{ 'visibility': 'hidden' }"
+          *ngIf="
+            !((signupFormControl['firstName'].touched || submitted) &&
+            signupFormControl['firstName'].errors?.['required']) 
+          "
+        >
+          firstname
+        </p>
+      </div>
+      <div class="form-item">
+        <span class="fas fa-user-circle"></span>
+        <input
+          type="text"
+          name="lastName"
+          formControlName="lastName"
+          placeholder="Last Name"
+        />
+        <p
+          class="text-danger"
+          *ngIf="
+            (signupFormControl['lastName'].touched || submitted) &&
+            signupFormControl['lastName'].errors?.['required']
+          "
+        >
+          *Last Name is required.
+        </p>
+
+        <p
+          [ngStyle]="{ 'visibility': 'hidden' }"
+          *ngIf="
+            !(
+              signupFormControl['lastName'].errors &&
+              (signupFormControl['lastName'].touched || submitted)
+            )
+          "
+        >
+          lastname
+        </p>
+      </div>
+      <div class="form-item">
+        <span class="fas fa-phone"></span>
+        <input
+          type="text"
+          name="mobileNumber"
+          formControlName="mobileNumber"
+          placeholder="Mobile Number"
+          maxlength="10"
+        />
+        <div *ngIf="signupFormControl['email'].touched || submitted">
+          <p
+            class="text-danger"
+            *ngIf="signupFormControl['mobileNumber'].errors?.['required']"
+          >
+            *Mobile Number is required.
+          </p>
+          <p
+            class="text-danger"
+            *ngIf="signupFormControl['mobileNumber'].errors?.['pattern']"
+          >
+            *Enter a valid mobile number.
+        </p>
+          <p
+            class="text-danger"
+            *ngIf="(signupFormControl['mobileNumber'].errors?.['maxlength'] || signupFormControl['mobileNumber'].errors?.['minlength'])"
+          >
+            *Mobile Number should have exactly 10 digits.
+          </p>
+        </div>
+
+        <p
+          [ngStyle]="{ 'visibility': 'hidden' }"
+          *ngIf="
+            !(
+              signupFormControl['mobileNumber'].errors &&
+              (signupFormControl['mobileNumber'].touched || submitted)
+            )
+          "
+        >
+          mobile
+        </p>
+      </div>
+      <div class="form-item">
+        <span class="fas fa-envelope"></span>
+        <input
+          type="email"
+          name="email"
+          formControlName="email"
+          placeholder="Email"
+        />
+        <div *ngIf="signupFormControl['email'].touched || submitted">
+          <p
+            class="text-danger"
+            *ngIf="signupFormControl['email'].errors?.['required']"
+          >
+            *Email is required.
+          </p>
+          <p
+            class="text-danger"
+            *ngIf="signupFormControl['email'].errors?.['email']"
+          >
+            *Enter a valid Email.
+          </p>
+        </div>
+        <p
+          [ngStyle]="{ 'visibility': 'hidden' }"
+          *ngIf="
+            !(
+              signupFormControl['email'].errors &&
+              (signupFormControl['email'].touched || submitted)
+            )
+          "
+        >
+          email
+        </p>
+      </div>
+      <div class="form-item" [ngStyle]="{ 'margin-bottom': '0px' }">
+        <label htmlFor="password">
+          <span class="fas fa-unlock"></span>
+        </label>
+        <input
+          [type]="toggle ? 'text' : 'password'"
+          name="password"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <button type="button" class="password-hide" (click)="toggle = !toggle">
+          <span class="fas fa-eye" *ngIf="toggle"></span>
+          <span class="fa fa-eye-slash" *ngIf="!toggle"></span>
+        </button>
+      </div>
+      <div *ngIf="signupFormControl['password'].touched || submitted">
+        <p
+          class="text-danger"
+          *ngIf="signupFormControl['password'].errors?.['required']"
+        >
+          *Password is required.
+        </p>
+        <p
+          class="text-danger"
+          *ngIf="signupFormControl['password'].errors?.['minlength']"
+        >
+          *Password should have atleast 8 characters.
+        </p>
+      </div>
+
+      <p
+        [ngStyle]="{ 'visibility': 'hidden' }"
+        *ngIf="
+          !(
+            signupFormControl['password'].errors &&
+            (signupFormControl['password'].touched || submitted)
+          )
+        "
+      >
+        password
+      </p>
+
+      <div [ngStyle]="{ 'margin-bottom': '30px' }"></div>
+      <div class="form-item" [ngStyle]="{ 'margin-bottom': '0px' }">
+        <label htmlFor="confirmPassword">
+          <span class="fas fa-unlock"></span>
+        </label>
+        <input
+          [type]="toggle ? 'text' : 'password'"
+          name="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="Confirm Password"
+        />
+        <button type="button" class="password-hide" (click)="toggle = !toggle">
+          <span class="fas fa-eye" *ngIf="toggle"></span>
+          <span class="fa fa-eye-slash" *ngIf="!toggle"></span>
+        </button>
+      </div>
+      <p
+        class="text-danger"
+        *ngIf="
+            (signupFormControl['confirmPassword'].touched || submitted) &&
+            signupForm.errors?.['misMatch']
+          "
+      >
+        *Passwords didn't match.
+      </p>
+
+      <p
+        [ngStyle]="{ 'visibility': 'hidden' }"
+        *ngIf="
+          !(
+            (signupFormControl['confirmPassword'].touched || submitted) &&
+            signupForm.errors?.['misMatch']
+          )
+        "
+      >
+        confirmPassword
+      </p>
+
+      <div [ngStyle]="{ 'margin-bottom': '30px' }"></div>
+      <button type="submit">Signup</button>
+      <p *ngIf="errorMsg">{{errorMsg}}</p>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <img src="./assets/heroBcg.png" alt="herobcg" class="img-fluid" />
+    <a routerLink="/login">Already have an account ? Login</a>
+  </div>
+</div>
+
+<app-modal *ngIf="displaySignupModal" [message]="'Registered successfully'"></app-modal>
+

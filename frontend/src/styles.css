@@ -1,0 +1,175 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+/* body{
+  background: linear-gradient(45DEG,#EEEEEE,#FAF8F9,#FFFFFF);
+} */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  color: rgb(26, 26, 45);
+  letter-spacing: 1px;
+  word-wrap: break-word;
+}
+
+
+
+a {
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color:rgb(81, 81, 116);
+}
+
+a:hover {
+  text-decoration: none;
+  color:rgb(81, 81, 116);
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+button {
+  background-color: hsl(22, 31%, 52%);
+  color: hsl(22, 31%, 88%);
+  border: none;
+  padding: 7px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  transition: all 0.3s linear;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+button a {
+  color: hsl(22, 31%, 88%);
+}
+
+button a:hover {
+  color: hsl(22, 28%, 21%);
+}
+button:hover {
+  background-color: hsl(22, 31%, 67%);
+  color: hsl(22, 28%, 21%);
+}
+
+.secondary {
+  background: transparent;
+  border: 2px solid hsl(22, 31%, 52%);
+  color: hsl(22, 31%, 52%);
+}
+
+.logo {
+  border-radius: 0.5rem;
+  height: 60px;
+  width: 180px;
+}
+
+p {
+  font-size: 15px;
+}
+
+form {
+  padding: 10px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.form-item {
+  margin-bottom: 20px;
+}
+.form-item select {
+  margin-left: 10px;
+  border: 2px solid rgb(194, 158, 158);
+}
+.form-item label {
+  color: rgb(62, 74, 62);
+  letter-spacing: 1px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid rgb(194, 158, 158);
+  padding-bottom: 5px;
+  background: transparent;
+}
+input:focus {
+  outline: none;
+  border-bottom: 2px solid black;
+}
+textarea:focus {
+  outline: none;
+  border-bottom: 2px solid black;
+}
+input::placeholder {
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+input:focus::placeholder {
+  color: black;
+}
+textarea::placeholder {
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+textarea:focus::placeholder {
+  color: black;
+}
+
+
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-content {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  position: fixed;
+  background: white;
+  width: 500px;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  padding: 50px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cross {
+  font-size: 20px;
+}
+
+.dont-break-out {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  hyphens: auto;
+}
+
+

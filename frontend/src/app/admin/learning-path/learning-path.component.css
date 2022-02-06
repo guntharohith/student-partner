@@ -1,0 +1,63 @@
+span{
+  font-size: 18px;
+  color:rgb(26, 26, 45);
+}
+
+.mat-column-action{
+  width: 100px;
+}
+
+a{
+  display: block;
+}
+
+.link-icon{
+  font-size: 15px;
+  color:inherit;
+  margin-right: 10px;
+}
+
+h5{
+  margin-bottom: 10px;
+}
+ .mat-cell{
+  padding:20px 20px 0 20px;
+}
+
+ .mat-header-cell{
+    padding:20px 20px 0 20px;
+} 
+
+table{
+  max-width: 100%;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.search{
+  width:150px;
+  border: 2px solid hsl(22, 31%, 52%);
+  border-radius: 5px;
+  padding: 5px;
+  color: hsl(22, 31%, 52%);
+}
+
+.form-item{
+  margin-bottom: 15px;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}

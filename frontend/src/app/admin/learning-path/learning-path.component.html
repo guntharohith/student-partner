@@ -1,0 +1,153 @@
+<app-admin-hero [title]="'Learning Paths'"></app-admin-hero>
+<div class="form-item">
+  <input
+    class="search"
+    matInput
+    type="text"
+    placeholder="Search"
+    (keyup)="doFilter($any($event.target).value)"
+  />
+</div>
+
+<table
+  class="mat-elevation-z8"
+  mat-table
+  [dataSource]="lpData"
+  matSort
+  multiTemplateDataRows
+>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.name | titlecase }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.category | titlecase }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <span class="far fa-trash-alt" (click)="removelp(element._id)"></span>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="expandedDetail">
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [attr.colspan]="displayedColumns.length"
+    >
+      <div
+        class="example-element-detail"
+        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+      >
+        <div>
+          <table
+            class="mat-elevation-z8 innerTable"
+            mat-table
+            matSort
+            [dataSource]="element.topics"
+            multiTemplateDataRows
+          >
+            <ng-container matColumnDef="topicName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Topic Name
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.topicName | titlecase }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="topicDes">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Topic Description
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.topicDes | titlecase }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="topicDetail">
+              <td
+                mat-cell
+                *matCellDef="let element"
+                [attr.colspan]="topicColumns.length"
+              >
+                <div
+                  class="example-element-detail"
+                  [@detailExpand]="
+                    element == expandedTopic ? 'expanded' : 'collapsed'
+                  "
+                >
+                  <div class="row">
+                    <div
+                      class="col-md-6"
+                      [ngStyle]="{
+                        display: 'flex',
+                        'flex-direction': 'column'
+                      }"
+                    >
+                      <h5>Resources</h5>
+                      <p class="dont-break-out">
+                        <a [href]="res" *ngFor="let res of element.resources"
+                          ><span class="fas fa-link link-icon"></span>{{ res }}</a
+                        >
+                      </p>
+                    </div>
+                    <div
+                      class="col-md-6"
+                      [ngStyle]="{
+                        display: 'flex',
+                        'flex-direction': 'column'
+                      }"
+                    >
+                      <h5>Assessments</h5>
+                      <p class="dont-break-out">
+                        <a
+                          [href]="assess"
+                          *ngFor="let assess of element.assessments"
+                          ><span class="fas fa-link link-icon"></span>{{ assess }}</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="topicColumns"></tr>
+            <tr
+              class="example-element-row"
+              mat-row
+              *matRowDef="let element; columns: topicColumns"
+              (click)="
+                expandedTopic = expandedTopic === element ? null : element
+              "
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: ['topicDetail']"
+              class="example-detail-row"
+            ></tr>
+          </table>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+    mat-row
+    class="example-element-row"
+    *matRowDef="let element; columns: displayedColumns"
+    (click)="expandedElement = expandedElement === element ? null : element"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['expandedDetail']"
+    class="example-detail-row"
+  ></tr>
+</table>
+
+<mat-paginator [pageSize]="4" [pageSizeOptions]="[1, 2, 4, 6, 10, 20]">
+</mat-paginator>
+<app-modal *ngIf="displayDeleteModal" [message]="'Learning Path deleted successfully'"></app-modal>

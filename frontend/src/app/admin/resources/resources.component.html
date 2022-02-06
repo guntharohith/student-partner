@@ -1,0 +1,60 @@
+<app-admin-hero [title]="'Resources'"></app-admin-hero>
+<div class="form-item">
+  <input
+    class="search"
+    matInput
+    type="text"
+    placeholder="Search"
+    (keyup)="doFilter($any($event.target).value)"
+  />
+</div>
+
+<table
+  class="mat-elevation-z8"
+  mat-table
+  [dataSource]="resourceData"
+  matSort
+  [ngStyle]="{ width: '100%' }"
+>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.name | titlecase }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.description | titlecase }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Link</th>
+    <td mat-cell *matCellDef="let element" class="dont-break-out">
+      {{ element.link }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="review">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Review</th>
+    <td mat-cell *matCellDef="let element">{{ element.review }}</td>
+  </ng-container>
+  <ng-container matColumnDef="rating">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
+    <td mat-cell *matCellDef="let element">{{ element.rating }}</td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <span
+        class="far fa-trash-alt"
+        (click)="removeResource(element._id)"
+      ></span>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator [pageSize]="4" [pageSizeOptions]="[1, 2, 4, 6, 10, 20]">
+</mat-paginator>
+<app-modal *ngIf="displayDeleteModal" [message]="'Resource deleted successfully'"></app-modal>

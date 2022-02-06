@@ -1,0 +1,176 @@
+<div class="row" [ngStyle]="{ display: 'flex', alignItems: 'center' }">
+  <div class="col-md-6">
+    <img src="./assets/heroBcg.png" alt="herobcg" class="img-fluid" />
+    <a routerLink="/signup">Don't have an account ? Create one</a>
+  </div>
+  <div class="col-md-6">
+    <h1>Sign in</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-item">
+        <span class="fas fa-envelope"></span>
+        <input
+          type="email"
+          name="email"
+          formControlName="email"
+          placeholder="Email"
+        />
+        <div *ngIf="loginFormControl['email'].touched || submitted">
+          <p
+            class="text-danger"
+            *ngIf="loginFormControl['email'].errors?.['required']"
+          >
+            *Email is required.
+          </p>
+          <p
+            class="text-danger"
+            *ngIf="loginFormControl['email'].errors?.['email']"
+          >
+            *Enter a valid Email.
+          </p>
+        </div>
+        <p
+          [ngStyle]="{ visibility: 'hidden' }"
+          *ngIf="
+            !(
+              loginFormControl['email'].errors &&
+              (loginFormControl['email'].touched || submitted)
+            )
+          "
+        >
+          email
+        </p>
+      </div>
+      <div class="form-item" [ngStyle]="{ 'margin-bottom': '0' }">
+        <label htmlFor="password">
+          <span class="fas fa-unlock"></span>
+        </label>
+        <input
+          [type]="toggle ? 'text' : 'password'"
+          name="password"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <button type="button" class="password-hide" (click)="toggle = !toggle">
+          <span class="fas fa-eye" *ngIf="toggle"></span>
+          <span class="fa fa-eye-slash" *ngIf="!toggle"></span>
+        </button>
+      </div>
+      <div *ngIf="loginFormControl['password'].touched || submitted">
+        <p
+          class="text-danger"
+          *ngIf="loginFormControl['password'].errors?.['required']"
+        >
+          *Password is required.
+        </p>
+        <p
+          class="text-danger"
+          *ngIf="loginFormControl['password'].errors?.['minlength']"
+        >
+          *Password should have atleast 8 characters.
+        </p>
+      </div>
+
+      <p
+        [ngStyle]="{ visibility: 'hidden' }"
+        *ngIf="
+          !(
+            loginFormControl['password'].errors &&
+            (loginFormControl['password'].touched || submitted)
+          )
+        "
+      >
+        password
+      </p>
+
+      <div [ngStyle]="{ 'margin-bottom': '20px' }"></div>
+      <button type="submit">Log in</button>
+      <p *ngIf="errMessage">{{ errMessage }}</p>
+      <p *ngIf="!errMessage" [ngStyle]="{ visibility: 'hidden' }">errMessage/p>
+    </form>
+    <div class="form-item">
+      <button class="forgot-password" (click)="modal = true">
+        Forgot password?
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="modal" class="modal-background">
+  <div class="modal-content">
+    <div
+      class="flex"
+      [ngStyle]="{
+        'margin-bottom': '20px',
+        'border-bottom': '1px solid black',
+        'padding-bottom': '10px'
+      }"
+    >
+      <h5>Reset Password</h5>
+      <span
+        class="fas fa-times"
+        [ngStyle]="{ 'font-size': '20px' }"
+        (click)="modal = false"
+      ></span>
+    </div>
+    <form
+      [formGroup]="forgotPasswordForm"
+      [ngStyle]="{ padding: '0px' }"
+      (ngSubmit)="onResetPassword()"
+    >
+      <p [ngStyle]="{ 'margin-bottom': '20px' }">
+        Enter your email address and we will send you a link to reset your
+        password.
+      </p>
+      <div class="form-item">
+        <span class="fas fa-envelope"></span>
+        <input
+          [ngStyle]="{ width: '400px' }"
+          type="email"
+          name="email"
+          formControlName="email"
+          placeholder="Email"
+        />
+        <div
+          *ngIf="
+            forgotPasswordFormControl['email'].touched ||
+            forgotPasswordSubmitted
+          "
+        >
+          <p
+            class="text-danger"
+            *ngIf="forgotPasswordFormControl['email'].errors?.['required']"
+          >
+            *Email is required.
+          </p>
+          <p
+            class="text-danger"
+            *ngIf="forgotPasswordFormControl['email'].errors?.['email']"
+          >
+            *Enter a valid Email.
+          </p>
+        </div>
+        <p
+          [ngStyle]="{ visibility: 'hidden' }"
+          *ngIf="
+            !(
+              forgotPasswordFormControl['email'].errors &&
+              (forgotPasswordFormControl['email'].touched ||
+                forgotPasswordSubmitted)
+            )
+          "
+        >
+          email
+        </p>
+      </div>
+
+      <div class="flex" [ngStyle]="{'margin-bottom':'20px'}">
+        <button (click)="modal = false">Cancel</button>
+        <button type="submit">Reset Password</button>
+      </div>
+      <p *ngIf="resetPasswordErrMessage">{{ resetPasswordErrMessage }}</p>
+      <p *ngIf="!resetPasswordErrMessage" [ngStyle]="{ visibility: 'hidden' }">errMsg</p>
+    </form>
+  </div>
+</div>
+<app-modal *ngIf="displayLoginModal" [message]="'Logged in successfully'"></app-modal>
+<app-modal *ngIf="displayEmailModal" [message]="'Email has been sent successfully'"></app-modal>

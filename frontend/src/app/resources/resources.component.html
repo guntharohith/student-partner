@@ -1,0 +1,106 @@
+<app-hero [title]="'Resources'"></app-hero>
+<div>
+  <div class="flex">
+    <div class="filter-resources">
+      <button
+        [ngStyle]="{ 'margin-right': '20px' }"
+        (click)="resourceTab = !resourceTab"
+        [ngClass]="{ secondary: !resourceTab }"
+      >
+        My Resources
+      </button>
+      <button
+        (click)="resourceTab = !resourceTab"
+        [ngClass]="{ secondary: resourceTab }"
+      >
+        All Resources
+      </button>
+    </div>
+    <button (click)="modal = true">Add Resource</button>
+  </div>
+  <hr />
+  <div
+    *ngFor="let res of !resourceTab ? resources : publicResources"
+    class="resource"
+  >
+    <img [src]="res.image" width="130" height="200" />
+    <div>
+      <h5>{{ res.name }}</h5>
+      <p>{{ res.description }}</p>
+      <p class="dont-break-out ">
+        <a [href]="res.link">{{ res.link }}</a>
+      </p>
+      <p><strong>Review</strong> : {{ res.review }}</p>
+      <p><strong>Rating</strong> : {{ res.rating }}/5</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="modal" class="modal-background">
+  <div class="modal-content">
+    <div class="flex" [ngStyle]="{ 'margin-bottom': '20px' }">
+      <h5 [ngStyle]="{ 'text-align': 'center' }">Add Resource</h5>
+      <span
+        class="fas fa-times"
+        [ngStyle]="{ 'font-size': '20px' }"
+        (click)="modal = false"
+      ></span>
+    </div>
+    <form [formGroup]="resourceForm" (ngSubmit)="onSubmit()">
+      <div class="form-item">
+        <input
+          type="text"
+          name="name"
+          placeholder="Resource name"
+          formControlName="name"
+        />
+      </div>
+      <div class="form-item">
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          formControlName="description"
+        />
+      </div>
+      <div class="form-item">
+        <input
+          type="text"
+          name="link"
+          placeholder="Resource link"
+          formControlName="link"
+        />
+      </div>
+      <div class="form-item">
+        <input
+          type="text"
+          name="image"
+          placeholder="Image link"
+          formControlName="image"
+        />
+      </div>
+      <div class="form-item">
+        <input
+          type="text"
+          name="review"
+          placeholder="Comment"
+          formControlName="review"
+        />
+      </div>
+      <div class="form-item">
+        <label>Rating:</label>
+        <select name="rating" formControlName="rating">
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="flex">
+        <button type="submit" [disabled]="!resourceForm.valid">SAVE</button>
+        <button type="button" (click)="modal = false">CANCEL</button>
+      </div>
+    </form>
+  </div>
+</div>

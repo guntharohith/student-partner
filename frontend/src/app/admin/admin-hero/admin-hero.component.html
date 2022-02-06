@@ -1,0 +1,9 @@
+<div>
+  <p *ngIf="!title; else ifTitle">Dashboard</p>
+  <ng-template #ifTitle>
+    <p>
+      <a routerLink="/admin">Dashboard /</a>
+      {{ " " + title }}
+    </p>
+  </ng-template>
+</div>

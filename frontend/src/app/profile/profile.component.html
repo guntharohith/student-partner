@@ -1,0 +1,204 @@
+<app-hero [title]="'Profile'"></app-hero>
+<div class="row flex">
+  <div class="col-md-4">
+    <img
+      *ngIf="profileImage"
+      [src]="profileImage"
+      class="img-fluid"
+      width="250"
+    />
+    <img
+      *ngIf="!profileImage"
+      src="./assets/profile.png"
+      class="img-fluid"
+      width="250"
+    />
+    <form class="profile-image flex">
+      <div>
+        <input type="file" name="image" (change)="selectImage($event)" />
+      </div>
+      <br />
+      <div>
+        <button type="submit" (click)="addProfileImage()">Upload</button>
+      </div>
+    </form>
+    <p *ngIf="imgErrMsg">*Allowed formats are png, jpg,jpeg</p>
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <form [formGroup]="updateProfileForm" (ngSubmit)="editProfile()">
+      <div [ngStyle]="{ display: 'flex' }">
+        <mat-form-field
+          appearance="outline"
+          [style.width.px]="250"
+          [ngStyle]="{ 'margin-right': '30px' }"
+        >
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            type="text"
+            name="firstName"
+            formControlName="firstName"
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="
+            ((updateProfileFormControl['firstName'].touched || updateProfileSubmitted) &&
+            updateProfileFormControl['firstName'].errors?.['required']) 
+          "
+          >
+            *First Name is required.
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" [style.width.px]="250">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            type="text"
+            name="lastName"
+            formControlName="lastName"
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="
+            ((updateProfileFormControl['lastName'].touched || updateProfileSubmitted) &&
+            updateProfileFormControl['lastName'].errors?.['required']) 
+          "
+          >
+            *First Name is required.
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div [ngStyle]="{ display: 'flex' }">
+        <mat-form-field
+          appearance="outline"
+          [style.width.px]="250"
+          [ngStyle]="{ 'margin-right': '30px' }"
+        >
+          <mat-label>Mobile Number</mat-label>
+          <input
+            matInput
+            type="text"
+            name="mobileNumber"
+            formControlName="mobileNumber"
+            maxlength="10"
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="(updateProfileFormControl['mobileNumber'].touched ||
+            updateProfileSubmitted) && (updateProfileFormControl['mobileNumber'].errors?.['required'])"
+          >
+            *Mobile number is required.
+          </mat-hint>
+          <mat-hint
+            class="text-danger"
+            *ngIf="(updateProfileFormControl['mobileNumber'].touched ||
+            updateProfileSubmitted) && (updateProfileFormControl['mobileNumber'].errors?.['pattern'])"
+          >
+            *Enter a valid mobile number.
+          </mat-hint>
+          <mat-hint
+            class="text-danger"
+            *ngIf="
+            (updateProfileFormControl['mobileNumber'].touched ||
+            updateProfileSubmitted) &&
+            (updateProfileFormControl['mobileNumber'].errors?.['maxlength'] ||
+            updateProfileFormControl['mobileNumber'].errors?.['minlength'])"
+          >
+            *Mobile number should have exactly 10 digits.
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" [style.width.px]="250">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" name="email" formControlName="email" />
+        </mat-form-field>
+      </div>
+      <button type="submit" [ngStyle]="{ width: '250px' }">Save</button>
+    </form>
+  </div>
+</div>
+<hr />
+<div class="row flex">
+  <div class="col-md-4">
+    <img src="./assets/changePassword.png" class="img-fluid" width="300" />
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+    <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+      <div>
+        <mat-form-field appearance="outline" [style.width.px]="250">
+          <mat-label>Current Password</mat-label>
+          <input
+            matInput
+            type="password"
+            name="currentPassword"
+            formControlName="currentPassword"
+          />
+          <!-- <mat-icon matSuffix><i class="fas fa-eye"></i></mat-icon> -->
+          <mat-hint
+            class="text-danger"
+            *ngIf="(changePasswordFormControl['currentPassword'].touched ||
+                  changePassSubmitted) && (changePasswordFormControl['currentPassword'].errors?.['required'])"
+          >
+            *Password is required.
+          </mat-hint>
+          <mat-hint
+            class="text-danger"
+            *ngIf="(changePasswordFormControl['currentPassword'].touched ||
+                  changePassSubmitted) && (changePasswordFormControl['currentPassword'].errors?.['minlength'])"
+          >
+            *Password should have atleast 8 characters.
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" [style.width.px]="250">
+          <mat-label>New Password</mat-label>
+          <input
+            matInput
+            type="password"
+            name="newPassword"
+            formControlName="newPassword"
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="(changePasswordFormControl['newPassword'].touched ||
+                  changePassSubmitted) && (changePasswordFormControl['newPassword'].errors?.['required'])"
+          >
+            *Password is required.
+          </mat-hint>
+          <mat-hint
+            class="text-danger"
+            *ngIf="(changePasswordFormControl['newPassword'].touched ||
+                  changePassSubmitted) && (changePasswordFormControl['newPassword'].errors?.['minlength'])"
+          >
+            *Password should have atleast 8 characters.
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" [style.width.px]="250">
+          <mat-label>Confirm New Password</mat-label>
+          <input
+            matInput
+            type="password"
+            name="confirmNewPassword"
+            formControlName="confirmNewPassword"
+          />
+          <mat-hint
+            class="text-danger"
+            *ngIf="(changePasswordFormControl['confirmNewPassword'].touched ||
+                  changePassSubmitted) && changePasswordForm.errors?.['misMatch']"
+          >
+            *Passwords didn't match.
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <button type="submit" [ngStyle]="{ width: '250px' }">
+        Change Password
+      </button>
+      <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    </form>
+  </div>
+</div>

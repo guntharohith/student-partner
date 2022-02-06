@@ -1,0 +1,25 @@
+
+<app-hero [title]="'Learning Paths'"></app-hero>
+<div *ngIf="learningPaths.length === 0; else learningPathsAvailable">
+  <h3>There are no Learning Paths</h3>
+  <button>
+    <a routerLink="/create-learning-path">CREATE ONE</a>
+  </button>
+</div>
+<ng-template #learningPathsAvailable>
+  <div>
+    <button>
+      <a routerLink="/create-learning-path">CREATE ONE</a>
+    </button>
+
+    <a
+      class="link"
+      *ngFor="let learningPath of learningPaths"
+      [routerLink]="['/learning-paths', learningPath._id]"
+
+    >
+      <h3>{{ learningPath.name }}</h3>
+      <p>{{ learningPath.category }}</p>
+    </a>
+  </div>
+</ng-template>

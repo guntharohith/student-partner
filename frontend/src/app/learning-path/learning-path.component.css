@@ -1,0 +1,47 @@
+h3 {
+  text-align: center;
+  color: rgb(24, 24, 60);
+}
+button {
+  display: block;
+  width: 125px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: rgb(26, 26, 45);
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 5px 0;
+  border-bottom: 4px solid rgb(176, 146, 146);
+}
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(238, 200, 186);
+  border-radius: 5px;
+  padding: 10px;
+  border-left: 10px solid rgb(176, 146, 146);
+  margin-bottom: 20px;
+
+}
+
+.link h3 {
+    margin: 0;
+    color: rgb(26, 26, 45);
+    letter-spacing: 1px;
+    padding: 3px 0;
+  }
+.link p {
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 15px;
+    background-color: rgb(176, 146, 146);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+}
